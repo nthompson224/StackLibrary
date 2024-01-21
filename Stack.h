@@ -10,6 +10,12 @@
 template<typename T>
 class Stack {
     int size;
+    T* stackArr;
+
+public:
+    Stack(const int& size);
+    ~Stack(); 
 };
 
+#include "Stack.cpp"
 #endif
