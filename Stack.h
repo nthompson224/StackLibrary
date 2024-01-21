@@ -18,6 +18,7 @@ public:
     ~Stack();
 
     void push(const T& item);
+    T pop();
 
     T& operator[](const int index) const;
 };
