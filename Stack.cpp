@@ -17,7 +17,7 @@ Stack<T>::~Stack() {
 
 template<typename T>
 void Stack<T>::push(const T& item) {
-    if (size == capacity) {
+    if (size == capacity || capacity == 0) {
         throw "Stack is at capacity\n";
     }
 
