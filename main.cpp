@@ -7,5 +7,7 @@ int main() {
 
     stack.push(5);
 
+    std::cout << stack[0] << '\n';
+
     return 0;
 }

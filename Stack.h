@@ -18,6 +18,8 @@ public:
     ~Stack();
 
     void push(const T& item);
+
+    T& operator[](const int index) const;
 };
 
 #include "Stack.cpp"

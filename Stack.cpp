@@ -25,4 +25,13 @@ void Stack<T>::push(const T& item) {
     ++size;
 }
 
+template<typename T>
+T& Stack<T>::operator[](const int index) const {
+    if (index > size) {
+        throw "Index out of range";
+    }
+    
+    return stackArr[index];
+}
+
 #endif
