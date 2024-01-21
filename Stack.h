@@ -10,11 +10,14 @@
 template<typename T>
 class Stack {
     int size;
+    int capacity;
     T* stackArr;
 
 public:
     Stack(const int& size);
-    ~Stack(); 
+    ~Stack();
+
+    void push(const T& item);
 };
 
 #include "Stack.cpp"
