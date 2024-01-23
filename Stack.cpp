@@ -27,7 +27,7 @@ void Stack<T>::push(const T& item) {
 template<typename T>
 T Stack<T>::pop() {
     if (size == -1) {
-        throw "Stack is empty";
+        throw "Stack is empty\n";
     }
 
     T element = stackArr[size--];

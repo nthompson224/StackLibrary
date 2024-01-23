@@ -4,13 +4,13 @@
 
 .PHONY: all
 
-main: main.o Stack.o
+main: testStack.o Stack.o
 	g++ -std=c++20 $^ -o $@
 
 stack.o: Stack.cpp
 	g++ -std=c++20 -c $<
 
-main.o: main.cpp Stack.cpp
+testStack.o: testStack.cpp Stack.cpp
 	g++ -std=c++20 -c $<
 
 .PHONY: run
