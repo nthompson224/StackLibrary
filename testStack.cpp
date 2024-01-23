@@ -115,6 +115,77 @@ int main() {
         assert(data[1] == 2);
         assert(error == "Stack is empty\n");
     }
+
+    {
+      char const* error = "";
+      int capacity;
+      int size;
+
+      try {
+        Stack<int> stack(5);
+        capacity = stack.capacity();
+        size = stack.size();
+      }
+      catch(char const* e) {
+        error = e;
+      }
+
+      assert(capacity == 5);
+      assert(size == -1);
+      assert(error == "");
+    }
+
+    {
+      char const* error = "";
+      int capacity;
+      int size;
+
+      try {
+        Stack<int> stack(5);
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+
+        capacity = stack.capacity();
+        size = stack.size();
+      }
+      catch(char const* e) {
+        error = e;
+      }
+
+      assert(capacity == 5);
+      assert(size == 3);
+      assert(error == "");
+    }
+
+    {
+      char const* error = "";
+      int data;
+      int capacity;
+      int size;
+
+      try {
+        Stack<int> stack(5);
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+
+        data = stack.pop();
+        
+        capacity = stack.capacity();
+        size = stack.size();
+      }
+      catch(char const* e) {
+        error = e;
+      }
+
+      assert(capacity == 5);
+      assert(size == 2);
+      assert(data == 4);
+      assert(error == "");
+    }
     
     std::cout << "All tests passed successfully!\n";
 

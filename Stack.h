@@ -9,8 +9,8 @@
 
 template<typename T>
 class Stack {
-    int size;
-    int capacity;
+    int stackSize;
+    int stackCapacity;
     T* stackArr;
 
 public:

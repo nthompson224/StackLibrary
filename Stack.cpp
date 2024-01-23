@@ -6,7 +6,7 @@
 #include <iostream>
 
 template<typename T>
-Stack<T>::Stack(const int& arrSize) : capacity(arrSize), size(-1) {
+Stack<T>::Stack(const int& arrSize) : stackCapacity(arrSize), stackSize(-1) {
     stackArr = new T[arrSize];
 }
 
@@ -17,37 +17,37 @@ Stack<T>::~Stack() {
 
 template<typename T>
 void Stack<T>::push(const T& item) {
-    if (size == capacity || capacity == 0) {
+    if (stackSize == stackCapacity || stackCapacity == 0) {
         throw "Stack is at capacity\n";
     }
 
-    stackArr[++size] = item;
+    stackArr[++stackSize] = item;
 }
 
 template<typename T>
 T Stack<T>::pop() {
-    if (size == -1) {
+    if (stackSize == -1) {
         throw "Stack is empty\n";
     }
 
-    T element = stackArr[size--];
+    T element = stackArr[stackSize--];
 
     return element;
 }
 
 template<typename T>
 int Stack<T>::size() {
-  return size;
+  return stackSize;
 }
 
 template<typename T>
 int Stack<T>::capacity() {
-  return capacity;
+  return stackCapacity;
 }
 
 template<typename T>
 T& Stack<T>::operator[](const int index) const {
-    if (index > size) {
+    if (index > stackSize) {
         throw "Index out of range\n";
     }
 
