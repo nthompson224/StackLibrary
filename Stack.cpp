@@ -36,6 +36,16 @@ T Stack<T>::pop() {
 }
 
 template<typename T>
+int Stack<T>::size() {
+  return size;
+}
+
+template<typename T>
+int Stack<T>::capacity() {
+  return capacity;
+}
+
+template<typename T>
 T& Stack<T>::operator[](const int index) const {
     if (index > size) {
         throw "Index out of range\n";

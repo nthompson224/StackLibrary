@@ -20,6 +20,9 @@ public:
     void push(const T& item);
     T pop();
 
+    int size();
+    int capacity();
+
     T& operator[](const int index) const;
 };
 
