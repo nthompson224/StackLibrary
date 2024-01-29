@@ -186,6 +186,49 @@ int main() {
       assert(data == 4);
       assert(error == "");
     }
+
+    {
+      char const* error = "";
+      int data;
+      int copyData;
+      int capacity;
+      int copyCapacity;
+      int size;
+      int copySize;
+
+      try {
+        Stack<int> stack(5);
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+
+        Stack<int> copyStack(stack);
+
+        data = stack.pop();
+        copyData = copyStack.pop();
+        
+        capacity = stack.capacity();
+        copyCapacity = copyStack.capacity();
+
+        size = stack.size();
+        copySize = copyStack.size();
+      }
+      catch(char const* e) {
+        error = e;
+      }
+
+      assert(capacity == 5);
+      assert(copyCapacity == 5);
+
+      assert(size == 2);
+      assert(copySize == 2);
+
+      
+      assert(data == 4);
+      assert(copyData == 4);
+      assert(error == "");
+    }
     
     std::cout << "All tests passed successfully!\n";
 

@@ -11,6 +11,14 @@ Stack<T>::Stack(const int& arrSize) : stackCapacity(arrSize), stackSize(-1) {
 }
 
 template<typename T>
+Stack<T>::Stack(const Stack& stack) : stackSize(stack.stackSize), stackCapacity(stack.stackCapacity) {
+    stackArr = new T[stack.stackCapacity];
+    for (int i = 0; i <= stack.stackSize; ++i) {
+        stackArr[i] = stack[i];
+    }
+}
+
+template<typename T>
 Stack<T>::~Stack() {
     delete[] stackArr;
 }

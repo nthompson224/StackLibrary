@@ -15,6 +15,8 @@ class Stack {
 
 public:
     Stack(const int& size);
+    Stack(const Stack& stack);
+    
     ~Stack();
 
     void push(const T& item);
