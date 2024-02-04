@@ -19,4 +19,4 @@ run: main
 
 .PHONY: clean
 clean : 
-	@rm -f main.o Stack.o main
+	@rm -f main.o Stack.o testStack.o main
