@@ -1,7 +1,7 @@
 #ifndef STACK_CPP
 #define STACK_CPP
 
-#include "Stack.h"
+#include "Stack.hpp"
 
 #include <iostream>
 

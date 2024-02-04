@@ -1,236 +1,116 @@
-#include "Stack.h"
+#include "Stack.hpp"
 #include <iostream>
 #include <cassert>
 
+char* convertToDigram(const std::string& strDigram) {
+  char character1 = 0x20;
+  char character2 = 0x20;
+
+  if (isspace(strDigram[0]) || ispunct(strDigram[0])) {
+    character1 = 0x20;
+  }
+
+  if (isspace(strDigram[1]) || ispunct(strDigram[1])) {
+    character2 = 0x20;
+  }
+
+  if (isalpha(strDigram[0])) {
+    character1 = strDigram[0];
+  }
+
+  if (isalpha(strDigram[1])) {
+    character2 = strDigram[1];
+  }
+
+  char* digram = new char[2];
+  digram[0] = character1;
+  digram[1] = character2;
+
+  return digram;
+}
+
 int main() {
-    {
-        char const* error = "";
 
-        try {
-            Stack<int> stack(0);
-        }
-        catch (char const* e) {
-            error = e;
-        }
+  std::cout << "\nRUNNING TEST SCRIPTS\n\n";
 
-        assert(error == "");
+  {
+    std::cout << "Test Script 1\n\n";
+
+    Stack<std::string> stack(2);
+
+    std::string pop1;
+    std::string pop2;
+    std::string underflowError;
+
+    const char* error;
+
+    try {
+      stack.push(convertToDigram("ab"));
+      stack.push(convertToDigram("cd"));
+      pop1 = stack.pop();
+      pop2 = stack.pop();
+      underflowError = stack.pop();
+
+    }
+    catch (char const* c) {
+      error = c;
     }
 
-    {
-        char const* error = "";
-        
-        try {
-            Stack<int> stack(0);
-            stack.push(2);
-        }
-        catch (char const* e) {
-            error = e;
-        }
 
-        assert(error == "Stack is at capacity\n");
+    assert(stack.size() == 0);
+    assert(stack.capacity() == 2);
+    assert(pop1[0] == 'c');
+    assert(pop1[1] == 'd');
+    assert(pop2[0] == 'a');
+    assert(pop2[1] == 'b');
+    assert(error == "Stack is empty\n");
+
+    std::cout << "stack.push(\"ab\")\n";
+    std::cout << "stack.push(\"cd\")\n";
+    std::cout << "stack.pop(): \"" << pop1[0] << pop1[1] << "\"\n";
+    std::cout << "stack.pop(): \"" << pop2[0] << pop2[1] << "\"\n";
+    std::cout << "stack.pop(): " << error << "\n";
+
+    std::cout << "Test Script 1: Passed\n\n";
+  }
+
+  {
+    std::cout << "Running Test Script 2\n\n";
+
+    Stack<std::string> stack(4);
+
+    std::string pop;
+    const char* error;
+
+    try {
+      stack.push(convertToDigram("ab"));
+      stack.push(convertToDigram("c"));
+      pop = stack.pop();
+      stack.push(convertToDigram("de"));
+      stack.push(convertToDigram("f "));
+      stack.push(convertToDigram("g."));
+      stack.push(convertToDigram("hi"));
+    }
+    catch (char const* c) {
+      error = c;
     }
 
-    {
-        char const* error = "";
-        
-        try {
-            Stack<int> stack(0);
-            auto shouldThrowError = stack.pop();
-        }
-        catch (char const* e) {
-            error = e;
-        }
+    assert(stack.size() == 4);
+    assert(stack.capacity() == 4);
+    assert(pop[0] == 'c');
+    assert(pop[1] == ' ');
+    assert(error == "Stack is at capacity\n");
 
-        assert(error == "Stack is empty\n");
-    }
+    std::cout << "stack.push(\"ab\")\n";
+    std::cout << "stack.push(\"c\")\n";
+    std::cout << "stack.pop(): \"" << pop[0] << pop[1] << "\"\n";
+    std::cout << "stack.push(\"de\")\n";
+    std::cout << "stack.push(\"f \")\n";
+    std::cout << "stack.push(\"g.\")\n";
+    std::cout << "stack.push(\"hi\"): " << error << "\n";
 
-    {
-        char const* error = "";
-        
-        try {
-            Stack<int> stack(1);
-            stack.push(2);
-        }
-        catch (char const* e) {
-            error = e;
-        }
+    std::cout << "Test Script 2: Passed\n\n";
+  }
 
-        assert(error == "");
-    }
-
-    {
-        char const* error = "";
-        int data = 0;
-
-        try {
-            Stack<int> stack(1);
-            stack.push(2);
-            data = stack.pop();
-        }
-        catch (char const* e) {
-            error = e;
-        }
-
-        assert(data == 2);
-        assert(error == "");
-    }
-
-    {
-        char const* error = "";
-        int data[2];
-
-        try {
-            Stack<int> stack(1);
-            stack.push(2);
-            stack.push(3);
-            data[0] = stack.pop();
-            data[1] = stack.pop();
-        }
-        catch (char const* e) {
-            error = e;
-        }
-
-        assert(data[0] == 3);
-        assert(data[1] == 2);
-        assert(error == "");
-    }
-
-    {
-        char const* error = "";
-        int data[2];
-
-        try {
-            Stack<int> stack(1);
-            stack.push(2);
-            stack.push(3);
-            data[0] = stack.pop();
-            data[1] = stack.pop();
-            auto shouldThrowError = stack.pop();
-        }
-        catch (char const* e) {
-            error = e;
-        }
-
-        assert(data[0] == 3);
-        assert(data[1] == 2);
-        assert(error == "Stack is empty\n");
-    }
-
-    {
-      char const* error = "";
-      int capacity;
-      int size;
-
-      try {
-        Stack<int> stack(5);
-        capacity = stack.capacity();
-        size = stack.size();
-      }
-      catch(char const* e) {
-        error = e;
-      }
-
-      assert(capacity == 5);
-      assert(size == -1);
-      assert(error == "");
-    }
-
-    {
-      char const* error = "";
-      int capacity;
-      int size;
-
-      try {
-        Stack<int> stack(5);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-
-        capacity = stack.capacity();
-        size = stack.size();
-      }
-      catch(char const* e) {
-        error = e;
-      }
-
-      assert(capacity == 5);
-      assert(size == 3);
-      assert(error == "");
-    }
-
-    {
-      char const* error = "";
-      int data;
-      int capacity;
-      int size;
-
-      try {
-        Stack<int> stack(5);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-
-        data = stack.pop();
-        
-        capacity = stack.capacity();
-        size = stack.size();
-      }
-      catch(char const* e) {
-        error = e;
-      }
-
-      assert(capacity == 5);
-      assert(size == 2);
-      assert(data == 4);
-      assert(error == "");
-    }
-
-    {
-      char const* error = "";
-      int data;
-      int copyData;
-      int capacity;
-      int copyCapacity;
-      int size;
-      int copySize;
-
-      try {
-        Stack<int> stack(5);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-
-        Stack<int> copyStack(stack);
-
-        data = stack.pop();
-        copyData = copyStack.pop();
-        
-        capacity = stack.capacity();
-        copyCapacity = copyStack.capacity();
-
-        size = stack.size();
-        copySize = copyStack.size();
-      }
-      catch(char const* e) {
-        error = e;
-      }
-
-      assert(capacity == 5);
-      assert(copyCapacity == 5);
-
-      assert(size == 2);
-      assert(copySize == 2);
-
-      
-      assert(data == 4);
-      assert(copyData == 4);
-      assert(error == "");
-    }
-    
-    std::cout << "All tests passed successfully!\n";
-
-    return 0;
+  return 0;
 }
