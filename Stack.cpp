@@ -25,7 +25,7 @@ Stack<T>::~Stack() {
 
 template<typename T>
 void Stack<T>::push(const T& item) {
-    if (stackSize == stackCapacity || stackCapacity == 0) {
+    if (stackSize + 1 == stackCapacity || stackCapacity == 0) {
         throw "Stack is at capacity\n";
     }
 
@@ -45,7 +45,7 @@ T Stack<T>::pop() {
 
 template<typename T>
 int Stack<T>::size() {
-  return stackSize;
+  return stackSize + 1;
 }
 
 template<typename T>
