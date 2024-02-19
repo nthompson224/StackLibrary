@@ -4,8 +4,15 @@
 
 .PHONY: all
 
-main: testStack.o Stack.o
+main_table: testStack.o Stack.o
 	g++ -std=c++20 $^ -o $@
+
+
+main_vector: testStackVector.o StackVector.o
+	g++ -std=c++20 $^ -o $@
+
+StackVector.o: StackVector.cpp
+	g++ -std=c++20 $^ -c $@
 
 stack.o: Stack.cpp
 	g++ -std=c++20 -c $<
@@ -13,10 +20,17 @@ stack.o: Stack.cpp
 testStack.o: testStack.cpp Stack.cpp
 	g++ -std=c++20 -c $<
 
-.PHONY: run
-run: main
-	./main
+testStackVector.o: testStackVector.cpp StackVector.cpp
+	g++ -std=c++20 -c $<
+
+.PHONY: run_table
+run_table: main_table
+	./main_table
+
+.PHONY: run_vector
+run_vector: main_vector
+	./main_vector
 
 .PHONY: clean
 clean : 
-	@rm -f main.o Stack.o testStack.o main
+	@rm -f main.o Stack.o testStack.o StackVector.o testStackVector.o main_table main_vector

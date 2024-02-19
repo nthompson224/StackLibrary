@@ -53,6 +53,7 @@ int main() {
 
     }
     catch (char const* c) {
+        std::cout << c;
       error = c;
     }
 
