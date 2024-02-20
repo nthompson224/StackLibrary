@@ -33,4 +33,4 @@ run_vector: main_vector
 
 .PHONY: clean
 clean : 
-	@rm -f main.o Stack.o testStack.o StackVector.o testStackVector.o main_table main_vector
+	@rm -f *.o main_table main_vector
