@@ -40,7 +40,6 @@ int main() {
 
     std::string pop1;
     std::string pop2;
-    std::string underflowError;
 
     const char* error;
 
@@ -49,7 +48,7 @@ int main() {
       stack.push(convertToDigram("cd"));
       pop1 = stack.pop();
       pop2 = stack.pop();
-      underflowError = stack.pop();
+      auto underflowError = stack.pop();
 
     }
     catch (char const* c) {
